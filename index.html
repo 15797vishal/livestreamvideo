@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RTSP to HLS </title>
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
+</head>
+<body>
+    <h1> Video Player</h1>
+    <video id="player" class="video-js" controls width="640" type="video/mp4" height="360"></video> 
+    <div>
+        <button onclick="playVideo()">Play</button>
+        <button onclick="pauseVideo()">Pause</button>
+        <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1" oninput="adjustVolume()">
+    </div>
+    <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
+    <script>
+        const player = videojs('player', {
+            html5: {
+                hls: {
+                    enableLowInitialPlaylist: true,
+                    smoothQualityChange: true,
+                },
+            },
+        });
+        player.src({
+            src: 'nature.mp4', // 
+            type: 'video/mp4', //declare type of video  depend on user
+        });
+
+        function playVideo() {
+            player.play();
+        }
+
+        function pauseVideo() {
+            player.pause();
+        }
+
+        function adjustVolume() {
+            player.volume(document.getElementById('volume-control').value);
+        }
+    </script>
+</body>
+</html>
